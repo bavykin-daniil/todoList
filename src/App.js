@@ -28,12 +28,47 @@ export default function App() {
                 todoTitle = {todoTitle}
                 setTodoTitle = {setTodoTitle}
                 addTodo = {addTodo}/>
-      <ul>
-        {state.map(todoItem => <TodoItem
-                                dispatch = {dispatch}
-                                todoItem = {todoItem}
-                                key = {todoItem.id}  />)}
-      </ul>
+      <div> TODO
+        <ul>
+          {state.map(todoItem => {
+            if (todoItem.column === "todo") {
+              return <TodoItem
+                  dispatch = {dispatch}
+                  todoItem = {todoItem}
+                  key = {todoItem.id} />
+            }
+            return null
+          })}
+        </ul>
+      </div>
+
+      <div> In progress
+        <ul>
+          {state.map(todoItem => {
+            if (todoItem.column === "inProgress") {
+              return <TodoItem
+                  dispatch = {dispatch}
+                  todoItem = {todoItem}
+                  key = {todoItem.id} />
+            }
+            return null
+          })}
+        </ul>
+      </div>
+
+      <div> Coded
+        <ul>
+          {state.map(todoItem => {
+            if (todoItem.column === "coded") {
+              return <TodoItem
+                  dispatch = {dispatch}
+                  todoItem = {todoItem}
+                  key = {todoItem.id} />
+            }
+            return null
+          })}
+        </ul>
+      </div>
     </div>
   );
 };
