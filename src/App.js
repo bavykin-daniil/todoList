@@ -4,7 +4,6 @@ import TodoInput from './components/TodoInput';
 import todoReducer from './reducers/todoReducer';
 
 export default function App() {
-  // const [todos, setTodos] = useState([]);
 
   const [todoTitle, setTodoTitle] = useState('');
 
@@ -31,6 +30,7 @@ export default function App() {
                 addTodo = {addTodo}/>
       <ul>
         {state.map(todoItem => <TodoItem
+                                dispatch = {dispatch}
                                 todoItem = {todoItem}
                                 key = {todoItem.id}  />)}
       </ul>
