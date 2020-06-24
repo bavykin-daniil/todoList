@@ -23,51 +23,71 @@ export default function App() {
   };
 
   return (
-    <div>
+    <div className = "todoListContainer">
       <TodoInput
                 todoTitle = {todoTitle}
                 setTodoTitle = {setTodoTitle}
                 addTodo = {addTodo}/>
-      <div> TODO
-        <ul>
-          {state.map(todoItem => {
-            if (todoItem.column === "todo") {
-              return <TodoItem
-                  dispatch = {dispatch}
-                  todoItem = {todoItem}
-                  key = {todoItem.id} />
-            }
-            return null
-          })}
-        </ul>
-      </div>
+      <div className = "todoLists">
+        <div className = "todoList">
+          <div className = "top todo">
+            <strong> Todo </strong>
+          </div>
 
-      <div> In progress
-        <ul>
-          {state.map(todoItem => {
-            if (todoItem.column === "inProgress") {
-              return <TodoItem
-                  dispatch = {dispatch}
-                  todoItem = {todoItem}
-                  key = {todoItem.id} />
-            }
-            return null
-          })}
-        </ul>
-      </div>
+          <div className = "bottom">
+            <ul>
+              {state.map(todoItem => {
+                if (todoItem.column === "todo") {
+                  return <TodoItem
+                      dispatch = {dispatch}
+                      todoItem = {todoItem}
+                      key = {todoItem.id} />
+                }
+                return null
+              })}
+            </ul>
+          </div>
+        </div>
 
-      <div> Coded
-        <ul>
-          {state.map(todoItem => {
-            if (todoItem.column === "coded") {
-              return <TodoItem
-                  dispatch = {dispatch}
-                  todoItem = {todoItem}
-                  key = {todoItem.id} />
-            }
-            return null
-          })}
-        </ul>
+        <div className = "todoList">
+          <div className = "top inProgress">
+            <strong> In progress </strong>
+          </div>
+
+          <div className = "bottom">
+            <ul>
+              {state.map(todoItem => {
+                if (todoItem.column === "inProgress") {
+                  return <TodoItem
+                      dispatch = {dispatch}
+                      todoItem = {todoItem}
+                      key = {todoItem.id} />
+                }
+                return null
+              })}
+            </ul>
+          </div>
+        </div>
+
+        <div className = "todoList">
+          <div className = "top coded">
+            <strong> Coded </strong>
+          </div>
+
+          <div className = "bottom">
+            <ul>
+              {state.map(todoItem => {
+                if (todoItem.column === "coded") {
+                  return <TodoItem
+                      dispatch = {dispatch}
+                      todoItem = {todoItem}
+                      key = {todoItem.id} />
+                }
+                return null
+              })}
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   );

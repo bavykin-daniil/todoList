@@ -2,12 +2,13 @@ import React from 'react';
 
 export default function TodoInput({todoTitle, setTodoTitle, addTodo}) {
     return (
-      <div>
+      <div className = "todoInputContainer">
             <input
                   value = {todoTitle}
-                  onChange = {(event) => setTodoTitle(event.target.value)}/>
+                  onChange = {(event) => setTodoTitle(event.target.value)}
+                  placeholder = "Enter todo title"/>
             <button onClick = {addTodo}>
-                Add
+                Add new
             </button>
       </div>  
     );

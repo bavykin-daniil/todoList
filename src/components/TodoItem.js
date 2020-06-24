@@ -1,43 +1,53 @@
 import React from 'react';
+import del from '../icons/delete.svg';
+import coded from '../icons/check.svg';
+import todo from '../icons/minus.svg';
+import inProg from '../icons/more.svg';
 
 export default function TodoItem({todoItem, dispatch}){
 
     return (
         <li>
-            <strong>{todoItem.id}</strong>
-            <p>{todoItem.title}</p>
-            <button onClick = {() => {
+            <div className = "data">
+                <p>{todoItem.title}</p>
+                <button onClick = {() => {
+                        dispatch({
+                        type: 'REMOVE_TODO',
+                        payload: todoItem.id
+                        })
+                    }}>
+                    <img src = {del} alt = "delete"/>
+                </button>
+            </div>
+            
+            <div className = "columnBtns">
+                <button className = "todo" onClick = {() => {
                     dispatch({
-                    type: 'REMOVE_TODO',
-                    payload: todoItem.id
+                        type: 'TODO',
+                        payload: todoItem.id
                     })
                 }}>
-                Delete
-            </button>
-            <button onClick = {() => {
-                dispatch({
-                    type: 'TODO',
-                    payload: todoItem.id
-                })
-            }}>
-                Todo
-            </button>
-            <button onClick = {() => {
-                dispatch({
-                    type: 'IN_PROGRESS',
-                    payload: todoItem.id
-                })
-            }}>
-                In progress
-            </button>
-            <button onClick = {() => {
-                dispatch({
-                    type: 'CODED',
-                    payload: todoItem.id
-                })
-            }}>
-                Coded
-            </button>
+                   <img src = {todo} alt = "todo"/> 
+                </button>
+
+                <button className = "prog" onClick = {() => {
+                    dispatch({
+                        type: 'IN_PROGRESS',
+                        payload: todoItem.id
+                    })
+                }}>
+                    <img src = {inProg} alt = "inProg"/>
+                </button>
+
+                <button className = "coded" onClick = {() => {
+                    dispatch({
+                        type: 'CODED',
+                        payload: todoItem.id
+                    })
+                }}>
+                    <img src = {coded} alt = "coded"/>
+                </button>
+            </div>
         </li>
     )
 }
