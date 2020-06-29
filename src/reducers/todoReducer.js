@@ -6,7 +6,6 @@ export default function(state, action) {
                 {
                     id: Date.now(),
                     title: action.payload,
-                    status: false,
                     column: "todo"
                 }
             ]

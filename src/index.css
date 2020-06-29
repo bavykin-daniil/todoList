@@ -59,6 +59,7 @@
   min-height: 200px;
   box-shadow: 0 2px 10px 1px rgba(0, 0, 0, 0.5);
   border-radius: 17px;
+  transition: all 500ms ease-out;;
 }
 
 .todoList .top {
@@ -110,6 +111,7 @@
 
 .todoList ul li .data p {
   flex: 1;
+  margin-right: 5px;
   font-size: 18px;
 }
 
@@ -123,7 +125,7 @@
   border-radius: 50%;
   outline: none;
   background: #ff7979;
-  transition: 0.7s;
+  transition: 0.4s;
 }
 
 .todoList ul li .data button:hover {
@@ -151,7 +153,7 @@
   border-style: none;
   border-radius: 50%;
   outline: none;
-  transition: 0.5s;
+  transition: 0.2s;
 }
 
 .todoList ul li .columnBtns button.todo{
@@ -176,4 +178,23 @@
 
 .todoList ul li .columnBtns button.coded:hover{
   background: #1e9e5b; 
+}
+
+.item-enter-active {
+  animation: item 500ms ease-out reverse;
+}
+
+.item-exit-active {
+  animation: item 500ms ease-out forwards;
+}
+
+@keyframes item {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
 }

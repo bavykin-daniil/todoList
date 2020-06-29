@@ -1,4 +1,5 @@
 import React from 'react';
+
 import del from '../icons/delete.svg';
 import coded from '../icons/check.svg';
 import todo from '../icons/minus.svg';
@@ -7,7 +8,7 @@ import inProg from '../icons/more.svg';
 export default function TodoItem({todoItem, dispatch}){
 
     return (
-        <li>
+            <li>
             <div className = "data">
                 <p>{todoItem.title}</p>
                 <button onClick = {() => {
@@ -27,7 +28,7 @@ export default function TodoItem({todoItem, dispatch}){
                         payload: todoItem.id
                     })
                 }}>
-                   <img src = {todo} alt = "todo"/> 
+                <img src = {todo} alt = "todo"/> 
                 </button>
 
                 <button className = "prog" onClick = {() => {
@@ -49,5 +50,5 @@ export default function TodoItem({todoItem, dispatch}){
                 </button>
             </div>
         </li>
-    )
+        )
 }
