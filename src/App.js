@@ -7,10 +7,12 @@ import 'aos/dist/aos.css';
 import TodoItem from './components/TodoItem';
 import TodoInput from './components/TodoInput';
 import todoReducer from './reducers/todoReducer';
+import Alert from './components/Alert';
 
 export default function App() {
 
   const [todoTitle, setTodoTitle] = useState('');
+  const [showAlert, setShowAlert] = useState(false);
 
   const localData = localStorage.getItem('todos');
   const getLocalData = localData ? JSON.parse(localData) : []
@@ -25,12 +27,25 @@ export default function App() {
       payload: todoTitle
     })
     setTodoTitle('')
+    setShowAlert(true)
   };
+
+  const hideAlert = () => {
+    setShowAlert(false)
+  }
 
   AOS.init()
 
   return (
     <div className = "todoListContainer">
+      <CSSTransition
+      in = {showAlert}
+      timeout = {500}
+      classNames = "alert"
+      unmountOnExit>
+        <Alert hideAlert = {hideAlert}/>
+      </CSSTransition>
+
       <TodoInput
                 todoTitle = {todoTitle}
                 setTodoTitle = {setTodoTitle}
@@ -49,7 +64,9 @@ export default function App() {
                 <TransitionGroup component = "ul">
                   {state.map(todoItem => {
                   if (todoItem.column === "todo") {
-                   return <CSSTransition key = {todoItem.id} timeout={500}
+                   return <CSSTransition
+                   key = {todoItem.id}
+                   timeout={500}
                    classNames="item">
                     <TodoItem
                           dispatch = {dispatch}
