@@ -59,8 +59,6 @@ export default function App() {
             <div className = "top todo">
               <strong> Todo </strong>
             </div>
-
-            <div className = "bottom">
                 <TransitionGroup component = "ul">
                   {state.map(todoItem => {
                   if (todoItem.column === "todo") {
@@ -76,7 +74,6 @@ export default function App() {
                   return null
                 })}
                 </TransitionGroup>
-            </div>
           </div>
 
           <div
