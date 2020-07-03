@@ -22,12 +22,16 @@ export default function App() {
   useEffect(() => localStorage.setItem('todos', JSON.stringify(state)))
 
   const addTodo = () => {
-    dispatch({
-      type: 'ADD_TODO',
-      payload: todoTitle
-    })
-    setTodoTitle('')
-    setShowAlert(true)
+    if (todoTitle !== "") {
+      dispatch({
+        type: 'ADD_TODO',
+        payload: todoTitle
+      })
+      setTodoTitle('')
+      setShowAlert(false)
+    } else {
+      setShowAlert(true)
+    }
   };
 
   const hideAlert = () => {
