@@ -22,7 +22,7 @@ export default function App() {
   useEffect(() => localStorage.setItem('todos', JSON.stringify(state)))
 
   const addTodo = () => {
-    if (todoTitle !== "") {
+    if (todoTitle.trim()) {
       dispatch({
         type: 'ADD_TODO',
         payload: todoTitle
@@ -30,6 +30,7 @@ export default function App() {
       setTodoTitle('')
       setShowAlert(false)
     } else {
+      setTodoTitle('')
       setShowAlert(true)
     }
   };

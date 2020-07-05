@@ -37,6 +37,14 @@ export default function(state, action) {
             return todoItem
         })
 
+        case 'EDIT_TODO':
+            return state.map(todoItem => {
+                if (todoItem.id === action.key) {
+                    todoItem.title = action.text
+                }
+                return todoItem
+            })
+
         default:
             return state
     }

@@ -10,7 +10,13 @@ export default function TodoItem({todoItem, dispatch}){
     return (
             <li>
             <div className = "data">
-                <p>{todoItem.title}</p>
+                <input value = {todoItem.title} onChange = {(event) => {
+                    dispatch({
+                        type: 'EDIT_TODO',
+                        key: todoItem.id,
+                        text: event.target.value
+                    })
+                }}  />
                 <button onClick = {() => {
                         dispatch({
                         type: 'REMOVE_TODO',
