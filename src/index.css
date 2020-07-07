@@ -23,6 +23,7 @@
   width: 340px;
   border-style: none;
   border-bottom: 1px solid #7d7d7d;
+  color: #7d7d7d;
   font-size: 18px;
   outline: none;
 }
@@ -87,6 +88,26 @@
 
 .todoList .top.coded {
   background: #20bf6b;
+}
+
+.todoList .search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.todoList .search input{
+  flex: 1;
+  margin: 10px 15px 0 15px;
+  padding: 5px 10px;
+  height: 30px;
+  border-style: none;
+  border-bottom: 1px solid #7d7d7d;
+  font-size: 18px;
+  color: #7d7d7d;
+  outline: none;
+  background: none;
 }
 
 .todoList ul {

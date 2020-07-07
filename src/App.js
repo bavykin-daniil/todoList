@@ -8,10 +8,13 @@ import TodoItem from './components/TodoItem';
 import TodoInput from './components/TodoInput';
 import todoReducer from './reducers/todoReducer';
 import Alert from './components/Alert';
+import TodoList from './components/TodoList';
+import TodoSearch from './components/TodoSearch';
 
 export default function App() {
 
   const [todoTitle, setTodoTitle] = useState('');
+  const [search, setSearch] = useState('');
   const [showAlert, setShowAlert] = useState(false);
 
   const localData = localStorage.getItem('todos');
@@ -52,84 +55,79 @@ export default function App() {
       </CSSTransition>
 
       <TodoInput
-                todoTitle = {todoTitle}
-                setTodoTitle = {setTodoTitle}
-                addTodo = {addTodo}/>
+      todoTitle = {todoTitle}
+      setTodoTitle = {setTodoTitle}
+      addTodo = {addTodo}/>
 
       <div className = "todoLists">
-          <div
-          className = "todoList"
-          data-aos="fade-up"
-          data-aos-delay = "200">
-            <div className = "top todo">
-              <strong> Todo </strong>
-            </div>
-                <TransitionGroup component = "ul">
-                  {state.map(todoItem => {
+          <TodoList
+          type = "todo"
+          delay = "200"
+          animation = "fade-up">
+            <TodoSearch 
+            search = {search}
+            setSearch = {setSearch}/>
+
+            <TransitionGroup component = "ul">
+                {state.map(todoItem => {
+                let searchResult = todoItem.title.indexOf(search);
+                
+                if (!search || (search && searchResult >= 0)) {
                   if (todoItem.column === "todo") {
-                   return <CSSTransition
-                   key = {todoItem.id}
-                   timeout={500}
-                   classNames="item">
+                    return <CSSTransition
+                    key = {todoItem.id}
+                    timeout={500}
+                    classNames="item">
                     <TodoItem
-                          dispatch = {dispatch}
-                          todoItem = {todoItem}/>
+                            dispatch = {dispatch}
+                            todoItem = {todoItem}/>
                     </CSSTransition>
-                  }
-                  return null
-                })}
-                </TransitionGroup>
-          </div>
+                    }
+                    return null
+                }
+                return null
+            })}
+            </TransitionGroup>
+          </TodoList>
 
-          <div
-          className = "todoList"
-          data-aos="fade-up"
-          data-aos-delay = "300">
-            <div className = "top inProgress">
-              <strong> In progress </strong>
-            </div>
+          <TodoList
+          type = "inProgress"
+          delay = "300"
+          animation = "fade-up">
+            
+            <TransitionGroup component = "ul">
+                {state.map(todoItem => {
+                if (todoItem.column === "inProgress") {
+                  return <CSSTransition key = {todoItem.id} timeout={500}
+                  classNames="item">
+                  <TodoItem
+                        dispatch = {dispatch}
+                        todoItem = {todoItem}/>
+                  </CSSTransition>
+                }
+                return null
+              })}
+            </TransitionGroup>
+          </TodoList>
 
-            <div className = "bottom">
-              <TransitionGroup component = "ul">
-                  {state.map(todoItem => {
-                  if (todoItem.column === "inProgress") {
-                   return <CSSTransition key = {todoItem.id} timeout={500}
-                   classNames="item">
-                    <TodoItem
-                          dispatch = {dispatch}
-                          todoItem = {todoItem}/>
-                    </CSSTransition>
-                  }
-                  return null
-                })}
-                </TransitionGroup>
-            </div>
-          </div>
-
-          <div
-          className = "todoList"
-          data-aos="fade-up"
-          data-aos-delay = "400">
-            <div className = "top coded">
-              <strong> Coded </strong>
-            </div>
-
-            <div className = "bottom">
-              <TransitionGroup component = "ul">
-                  {state.map(todoItem => {
-                  if (todoItem.column === "coded") {
-                   return <CSSTransition key = {todoItem.id} timeout={500}
-                   classNames="item">
-                    <TodoItem
-                          dispatch = {dispatch}
-                          todoItem = {todoItem}/>
-                    </CSSTransition>
-                  }
-                  return null
-                })}
-                </TransitionGroup>
-            </div>
-          </div>
+          <TodoList
+          type = "coded"
+          delay = "400"
+          animation = "fade-up">
+            <TransitionGroup component = "ul">
+                {state.map(todoItem => {
+                if (todoItem.column === "coded") {
+                  return <CSSTransition key = {todoItem.id} timeout={500}
+                  classNames="item">
+                  <TodoItem
+                        dispatch = {dispatch}
+                        todoItem = {todoItem}/>
+                  </CSSTransition>
+                }
+                return null
+              })}
+            </TransitionGroup>
+          </TodoList>
       </div>
     </div>
   );
