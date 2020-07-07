@@ -14,7 +14,9 @@ import TodoSearch from './components/TodoSearch';
 export default function App() {
 
   const [todoTitle, setTodoTitle] = useState('');
-  const [search, setSearch] = useState('');
+  const [todoSearch, setTodoSearch] = useState('');
+  const [inProgressSearch, setInProgressSearch] = useState('');
+  const [codedSearch, setCodedSearch] = useState('');
   const [showAlert, setShowAlert] = useState(false);
 
   const localData = localStorage.getItem('todos');
@@ -65,14 +67,14 @@ export default function App() {
           delay = "200"
           animation = "fade-up">
             <TodoSearch 
-            search = {search}
-            setSearch = {setSearch}/>
+            search = {todoSearch}
+            setSearch = {setTodoSearch}/>
 
             <TransitionGroup component = "ul">
-                {state.map(todoItem => {
-                let searchResult = todoItem.title.indexOf(search);
+              {state.map(todoItem => {
+                let searchResult = todoItem.title.indexOf(todoSearch);
                 
-                if (!search || (search && searchResult >= 0)) {
+                if (!todoSearch || (todoSearch && searchResult >= 0)) {
                   if (todoItem.column === "todo") {
                     return <CSSTransition
                     key = {todoItem.id}
@@ -86,7 +88,7 @@ export default function App() {
                     return null
                 }
                 return null
-            })}
+              })}
             </TransitionGroup>
           </TodoList>
 
@@ -94,16 +96,26 @@ export default function App() {
           type = "inProgress"
           delay = "300"
           animation = "fade-up">
+            <TodoSearch 
+            search = {inProgressSearch}
+            setSearch = {setInProgressSearch}/>
             
             <TransitionGroup component = "ul">
-                {state.map(todoItem => {
-                if (todoItem.column === "inProgress") {
-                  return <CSSTransition key = {todoItem.id} timeout={500}
-                  classNames="item">
-                  <TodoItem
-                        dispatch = {dispatch}
-                        todoItem = {todoItem}/>
-                  </CSSTransition>
+              {state.map(todoItem => {
+                let searchResult = todoItem.title.indexOf(inProgressSearch);
+                
+                if (!inProgressSearch || (inProgressSearch && searchResult >= 0)) {
+                  if (todoItem.column === "inProgress") {
+                    return <CSSTransition
+                    key = {todoItem.id}
+                    timeout={500}
+                    classNames="item">
+                    <TodoItem
+                            dispatch = {dispatch}
+                            todoItem = {todoItem}/>
+                    </CSSTransition>
+                    }
+                    return null
                 }
                 return null
               })}
@@ -114,15 +126,26 @@ export default function App() {
           type = "coded"
           delay = "400"
           animation = "fade-up">
+            <TodoSearch 
+            search = {codedSearch}
+            setSearch = {setCodedSearch}/>
+
             <TransitionGroup component = "ul">
-                {state.map(todoItem => {
-                if (todoItem.column === "coded") {
-                  return <CSSTransition key = {todoItem.id} timeout={500}
-                  classNames="item">
-                  <TodoItem
-                        dispatch = {dispatch}
-                        todoItem = {todoItem}/>
-                  </CSSTransition>
+              {state.map(todoItem => {
+                let searchResult = todoItem.title.indexOf(codedSearch);
+                
+                if (!codedSearch || (codedSearch && searchResult >= 0)) {
+                  if (todoItem.column === "coded") {
+                    return <CSSTransition
+                    key = {todoItem.id}
+                    timeout={500}
+                    classNames="item">
+                    <TodoItem
+                            dispatch = {dispatch}
+                            todoItem = {todoItem}/>
+                    </CSSTransition>
+                    }
+                    return null
                 }
                 return null
               })}
